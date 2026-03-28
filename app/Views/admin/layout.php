@@ -371,10 +371,29 @@
         </div>
 
         <div class="nav-section">
-            <div class="nav-section-label">Contenu</div>
-            <a href="/admin/pages" class="nav-link<?= navActive('admin/pages', $currentPath) ?>">
-                <span class="icon">☰</span> Pages & blocs
+            <div class="nav-section-label">Pages</div>
+            <a href="/admin/pages/accueil" class="nav-link<?= navActive('admin/pages/accueil', $currentPath) ?>">
+                <span class="icon">⌂</span> Accueil
             </a>
+            <a href="/admin/pages/chambres-d-hotes" class="nav-link<?= navActive('admin/pages/chambres-d-hotes', $currentPath) ?>">
+                <span class="icon">◻</span> Chambres d'hôtes
+            </a>
+            <a href="/admin/pages/location-villa-provence" class="nav-link<?= navActive('admin/pages/location-villa-provence', $currentPath) ?>">
+                <span class="icon">◻</span> Villa
+            </a>
+            <a href="/admin/pages/journal" class="nav-link<?= navActive('admin/pages/journal', $currentPath) ?>">
+                <span class="icon">◻</span> Journal
+            </a>
+            <a href="/admin/pages/sur-place" class="nav-link<?= navActive('admin/pages/sur-place', $currentPath) ?>">
+                <span class="icon">◻</span> Sur Place
+            </a>
+            <a href="/admin/pages/contact" class="nav-link<?= navActive('admin/pages/contact', $currentPath) ?>">
+                <span class="icon">◻</span> Contact
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-label">Contenus</div>
             <a href="/admin/pieces" class="nav-link<?= navActive('admin/pieces', $currentPath) ?>">
                 <span class="icon">⬡</span> Pièces
             </a>
