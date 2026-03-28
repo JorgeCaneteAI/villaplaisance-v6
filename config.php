@@ -1,6 +1,11 @@
 <?php
 declare(strict_types=1);
 
+// ── ROOT — défini ici si exécution CLI (seeds) ────────────────────────────────
+if (!defined('ROOT')) {
+    define('ROOT', __DIR__);
+}
+
 // ── Variables d'environnement ─────────────────────────────────────────────────
 $envFile = ROOT . '/.env';
 if (file_exists($envFile)) {
