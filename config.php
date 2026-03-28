@@ -38,20 +38,14 @@ require ROOT . '/app/Services/LangService.php';
 require ROOT . '/app/Services/SeoService.php';
 require ROOT . '/app/Services/BlockService.php';
 
-// ── Autoloader PSR-4 minimal (Controllers\*) ──────────────────────────────────
+// ── Autoloader PSR-4 minimal ──────────────────────────────────────────────────
+require ROOT . '/app/Router.php';
+
 spl_autoload_register(function (string $class): void {
-    $map = [
-        'Controllers\\' => ROOT . '/app/Controllers/',
-        'Router'        => ROOT . '/app/Router.php',
-    ];
-    foreach ($map as $prefix => $base) {
-        if (str_starts_with($class, $prefix)) {
-            $file = $base . str_replace(['\\', $prefix . '/'], ['/', ''], substr($class, strlen($prefix))) . '.php';
-            if (file_exists($file)) require $file;
-            return;
-        }
+    if (str_starts_with($class, 'Controllers\\')) {
+        $file = ROOT . '/app/Controllers/' . str_replace('\\', '/', substr($class, strlen('Controllers\\'))) . '.php';
+        if (file_exists($file)) require $file;
     }
-    if ($class === 'Router') require ROOT . '/app/Router.php';
 });
 
 // ── Session sécurisée ─────────────────────────────────────────────────────────
