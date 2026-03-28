@@ -18,7 +18,7 @@ class DashboardController extends AdminBaseController
             'medias'   => $this->count('vp_media'),
         ];
 
-        $pages = Database::fetchAll("SELECT slug, title, lang, updated_at FROM vp_pages ORDER BY lang, slug");
+        $pages = \Database::fetchAll("SELECT slug, title, lang, updated_at FROM vp_pages ORDER BY lang, slug");
 
         $this->render('admin/dashboard/index', [
             'stats'    => $stats,
@@ -30,7 +30,7 @@ class DashboardController extends AdminBaseController
 
     private function count(string $table): int
     {
-        $row = Database::fetchOne("SELECT COUNT(*) AS n FROM {$table}");
+        $row = \Database::fetchOne("SELECT COUNT(*) AS n FROM {$table}");
         return (int)($row['n'] ?? 0);
     }
 }
