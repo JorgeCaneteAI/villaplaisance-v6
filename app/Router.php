@@ -77,6 +77,14 @@ class Router
             (new Controllers\Admin\AuthController())->logout();
             return;
         }
+        if ($path === 'admin/mot-de-passe-oublie') {
+            (new Controllers\Admin\AuthController())->forgotPassword();
+            return;
+        }
+        if ($path === 'admin/reinitialiser-mot-de-passe') {
+            (new Controllers\Admin\AuthController())->resetPassword();
+            return;
+        }
 
         // Auth requise pour tout le reste
         if (empty($_SESSION['admin_authenticated'])) {
