@@ -17,6 +17,12 @@
         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf) ?>">
 
         <div class="form-group">
+            <label class="form-label">Slug <span style="color:var(--c-muted);font-weight:400;">(URL de la page)</span></label>
+            <input type="text" name="slug" class="form-control" value="<?= htmlspecialchars($page['slug'] ?? '') ?>">
+            <p class="form-hint">Minuscules, tirets uniquement. Ex : <code>chambres-d-hotes</code>. Changer le slug modifie l'URL de la page.</p>
+        </div>
+
+        <div class="form-group">
             <label class="form-label">Titre de la page <span style="color:var(--c-muted);font-weight:400;">(balise H1 visible)</span></label>
             <input type="text" name="title" class="form-control" value="<?= htmlspecialchars($page['title'] ?? '') ?>">
         </div>

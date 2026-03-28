@@ -59,7 +59,11 @@ class PageController extends AdminBaseController
         if (!$page) {
             $this->redirect('/admin/pages');
         }
+        $newSlug = $this->slugify(trim($_POST['slug'] ?? $slug));
+        if (empty($newSlug)) $newSlug = $slug;
+
         \Database::update('vp_pages', [
+            'slug'          => $newSlug,
             'title'         => trim($_POST['title']         ?? ''),
             'meta_title'    => trim($_POST['meta_title']    ?? ''),
             'meta_desc'     => trim($_POST['meta_desc']     ?? ''),
@@ -67,7 +71,7 @@ class PageController extends AdminBaseController
             'gso_desc'      => trim($_POST['gso_desc']      ?? ''),
         ], 'id = ?', [$page['id']]);
 
-        $this->flash('success', 'SEO mis à jour.');
-        $this->redirect('/admin/pages/' . $slug);
+        $this->flash('success', 'Page mise à jour.');
+        $this->redirect('/admin/pages/' . $newSlug);
     }
 }

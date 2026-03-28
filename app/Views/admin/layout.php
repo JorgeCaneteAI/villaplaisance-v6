@@ -372,24 +372,30 @@
 
         <div class="nav-section">
             <div class="nav-section-label">Pages</div>
-            <a href="/admin/pages/accueil" class="nav-link<?= navActive('admin/pages/accueil', $currentPath) ?>">
-                <span class="icon">⌂</span> Accueil
+            <?php
+            $navPages = \Database::fetchAll(
+                "SELECT slug, title FROM vp_pages WHERE lang = 'fr'
+                 AND slug NOT IN ('mentions-legales','politique-confidentialite')
+                 ORDER BY FIELD(slug,'accueil','chambres-d-hotes','location-villa-provence','journal','sur-place','contact')"
+            );
+            foreach ($navPages as $np):
+                $label = $np['title'] ?: $np['slug'];
+                // Raccourcis d'affichage
+                $label = match($np['slug']) {
+                    'accueil'                   => 'Accueil',
+                    'chambres-d-hotes'          => 'Chambres d\'hôtes',
+                    'location-villa-provence'   => 'Villa',
+                    'journal'                   => 'Journal',
+                    'sur-place'                 => 'Sur Place',
+                    'contact'                   => 'Contact',
+                    default                     => $np['title'] ?: $np['slug'],
+                };
+            ?>
+            <a href="/admin/pages/<?= htmlspecialchars($np['slug']) ?>"
+               class="nav-link<?= navActive('admin/pages/' . $np['slug'], $currentPath) ?>">
+                <span class="icon">◻</span> <?= htmlspecialchars($label) ?>
             </a>
-            <a href="/admin/pages/chambres-d-hotes" class="nav-link<?= navActive('admin/pages/chambres-d-hotes', $currentPath) ?>">
-                <span class="icon">◻</span> Chambres d'hôtes
-            </a>
-            <a href="/admin/pages/location-villa-provence" class="nav-link<?= navActive('admin/pages/location-villa-provence', $currentPath) ?>">
-                <span class="icon">◻</span> Villa
-            </a>
-            <a href="/admin/pages/journal" class="nav-link<?= navActive('admin/pages/journal', $currentPath) ?>">
-                <span class="icon">◻</span> Journal
-            </a>
-            <a href="/admin/pages/sur-place" class="nav-link<?= navActive('admin/pages/sur-place', $currentPath) ?>">
-                <span class="icon">◻</span> Sur Place
-            </a>
-            <a href="/admin/pages/contact" class="nav-link<?= navActive('admin/pages/contact', $currentPath) ?>">
-                <span class="icon">◻</span> Contact
-            </a>
+            <?php endforeach; ?>
         </div>
 
         <div class="nav-section">
