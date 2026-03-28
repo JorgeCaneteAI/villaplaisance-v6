@@ -1,0 +1,6 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/efkz3012/villaplaisance-v6/
+    - /bin/rsync -avz --exclude='.git' --exclude='.env' ${CPANEL_BASE_DIR}/ $DEPLOYPATH
+    - /bin/chmod -R 755 $DEPLOYPATH
