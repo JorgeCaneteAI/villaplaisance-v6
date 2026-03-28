@@ -12,9 +12,12 @@ $avis   = Database::fetchAll(
     <div class="avis-grid">
         <?php foreach ($avis as $av): ?>
         <blockquote class="avis-card">
-            <p class="avis-text"><?= nl2br(htmlspecialchars($av['comment'] ?? '')) ?></p>
+            <p class="avis-text"><?= nl2br(htmlspecialchars($av['content'] ?? '')) ?></p>
             <footer class="avis-footer">
                 <cite class="avis-author"><?= htmlspecialchars($av['author'] ?? '') ?></cite>
+                <?php if (!empty($av['origin'])): ?>
+                <span class="avis-origin"><?= htmlspecialchars($av['origin']) ?></span>
+                <?php endif; ?>
                 <?php if (!empty($av['rating'])): ?>
                 <span class="avis-stars" aria-label="<?= (int)$av['rating'] ?> étoiles sur 5">
                     <?= str_repeat('★', min(5, (int)$av['rating'])) ?>

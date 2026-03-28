@@ -1,5 +1,5 @@
 <?php
-$lieux = Database::fetchAll("SELECT * FROM vp_proximites ORDER BY distance_km ASC");
+$lieux = Database::fetchAll("SELECT * FROM vp_proximites WHERE active = 1 ORDER BY position ASC");
 $categories = [];
 foreach ($lieux as $lieu) {
     $categories[$lieu['category']][] = $lieu;
@@ -17,11 +17,11 @@ foreach ($lieux as $lieu) {
                 <li class="territoire-item">
                     <span class="territoire-name"><?= htmlspecialchars($lieu['name']) ?></span>
                     <span class="territoire-dist">
-                        <?php if (!empty($lieu['distance_km'])): ?>
-                        <?= htmlspecialchars($lieu['distance_km']) ?> km
+                        <?php if (!empty($lieu['distance'])): ?>
+                        <?= htmlspecialchars($lieu['distance']) ?>
                         <?php endif; ?>
-                        <?php if (!empty($lieu['duration_min'])): ?>
-                        · <?= htmlspecialchars($lieu['duration_min']) ?> min
+                        <?php if (!empty($lieu['duration'])): ?>
+                        · <?= htmlspecialchars($lieu['duration']) ?>
                         <?php endif; ?>
                     </span>
                 </li>
