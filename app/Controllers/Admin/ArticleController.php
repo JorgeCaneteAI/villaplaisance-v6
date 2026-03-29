@@ -9,6 +9,7 @@ class ArticleController extends AdminBaseController
     public function index(): void
     {
         $this->requireAuth();
+        error_log("DEBUG articles 1: controller reached\n", 3, "/tmp/vp_debug.log");
 
         $filter = $_GET['type'] ?? '';
         $sql    = "SELECT * FROM vp_articles WHERE lang = 'fr'";
@@ -20,6 +21,7 @@ class ArticleController extends AdminBaseController
         $sql .= " ORDER BY type ASC, published_at DESC";
 
         $articles = \Database::fetchAll($sql, $params);
+        error_log("DEBUG articles 2: query OK, count=" . count($articles) . "\n", 3, "/tmp/vp_debug.log");
 
         $this->render('admin/articles/index', [
             'pageTitle' => 'Articles',
