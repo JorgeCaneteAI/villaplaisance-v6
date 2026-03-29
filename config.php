@@ -37,6 +37,7 @@ require ROOT . '/app/Services/Database.php';
 require ROOT . '/app/Services/LangService.php';
 require ROOT . '/app/Services/SeoService.php';
 require ROOT . '/app/Services/BlockService.php';
+require ROOT . '/app/Services/IconService.php';
 
 // ── Autoloader PSR-4 minimal ──────────────────────────────────────────────────
 require ROOT . '/app/Router.php';
