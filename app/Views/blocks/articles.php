@@ -24,8 +24,9 @@ $baseUrl = $type === 'journal' ? navUrl('journal', $lang ?? 'fr') : navUrl('sur-
             </figure>
             <?php endif; ?>
             <div class="article-card-body">
-                <?php if (!empty($art['created_at'])): ?>
-                <time class="article-date"><?= date('j F Y', strtotime($art['created_at'])) ?></time>
+                <?php $artDate = $art['published_at'] ?? $art['created_at'] ?? ''; ?>
+                <?php if ($artDate): ?>
+                <time class="article-date"><?= date('j F Y', strtotime($artDate)) ?></time>
                 <?php endif; ?>
                 <h3 class="article-card-title">
                     <a href="<?= rtrim($baseUrl, '/') ?>/<?= htmlspecialchars($art['slug'] ?? '') ?>">

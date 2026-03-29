@@ -43,6 +43,19 @@ class SeoService
         return $seo;
     }
 
+    public static function forArticle(array $article, string $lang, string $urlPath): self
+    {
+        $seo = new self();
+        $seo->lang      = $lang;
+        $seo->title     = $article['meta_title']    ?: ($article['title'] ?? '');
+        $seo->desc      = $article['meta_desc']     ?: ($article['excerpt'] ?? '');
+        $seo->keywords  = $article['meta_keywords'] ?? '';
+        $seo->gsoDesc   = $article['gso_desc']      ?? '';
+        $seo->ogImage   = $article['og_image']      ?? '';
+        $seo->canonical = APP_URL . '/' . ($lang !== DEFAULT_LANG ? $lang . '/' : '') . $urlPath;
+        return $seo;
+    }
+
     public function addSchema(array $schema): void
     {
         $this->schemas[] = $schema;

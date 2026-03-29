@@ -4,7 +4,8 @@ $title   = htmlspecialchars($article['title'] ?? '');
 $content_data = json_decode($article['content'] ?? '{}', true);
 $body    = $content_data['body'] ?? ($article['content'] ?? '');
 $cover   = $article['cover_image'] ?? '';
-$date    = isset($article['created_at']) ? date('j F Y', strtotime($article['created_at'])) : '';
+$dateRaw = $article['published_at'] ?? $article['created_at'] ?? '';
+$date    = $dateRaw ? date('j F Y', strtotime($dateRaw)) : '';
 $type    = $article['type'] ?? 'journal';
 $backUrl = $type === 'journal' ? navUrl('journal', $lang ?? 'fr') : navUrl('sur-place', $lang ?? 'fr');
 $backLabel = $type === 'journal' ? t('nav.journal') : t('nav.sur_place');
@@ -26,7 +27,7 @@ $backLabel = $type === 'journal' ? t('nav.journal') : t('nav.sur_place');
     </header>
 
     <div class="article-body prose-content">
-        <?= nl2br(htmlspecialchars($body)) ?>
+        <?= $body ?>
     </div>
 </article>
 

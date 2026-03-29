@@ -21,6 +21,12 @@ class JournalController extends BaseFrontController
             $this->render('front/404', []);
             return;
         }
-        $this->render('front/article', ['article' => $article]);
+        $lang = \LangService::get();
+        $seo  = \SeoService::forArticle($article, $lang, 'journal/' . $slug);
+        $this->render('front/article', [
+            'article' => $article,
+            'lang'    => $lang,
+            'seo'     => $seo,
+        ]);
     }
 }
